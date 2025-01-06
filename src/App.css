@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  width: 100%; /* Garantir que o root ocupe toda a largura */
+  height: 100vh; /* Garantir que o root ocupe toda a altura da tela */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Garantir que o texto seja centralizado */
+}
+
+body {
+  background-image: url('sua-imagem.png'); /* Caminho para sua imagem */
+  background-size: 50% auto; /* 50% da largura e altura proporcional */
+  background-position: center center; /* Centralizar a imagem */
+  background-repeat: no-repeat; /* Evitar repetições */
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  margin: 0; /* Remove margens */
+  padding: 0; /* Remove padding */
+  display: flex; /* Centraliza o conteúdo */
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 100%; /* Ocupa toda a largura */
+  height: 100vh; /* Ocupa toda a altura */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Centraliza texto */
+}
+
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.card {
+  padding: 2em;
+  text-align: center; /* Garantir que o texto dentro da card esteja centralizado */
+}
+
+.read-the-docs {
+  color: #888;
+  text-align: center; /* Garantir que o texto esteja centralizado */
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.left-section {
+  width: 50%; /* Garante que ocupa exatamente metade da tela */
+  height: 100vh; /* Faz a altura ocupar toda a viewport */
+  overflow: hidden; /* Remove qualquer parte extra que ultrapasse */
+  margin: 0; /* Remove bordas ou espaçamentos */
+}
+
+.left-section img {
+  width: 100%; /* Faz a imagem ocupar toda a largura */
+  height: 100%; /* Faz a imagem ocupar toda a altura */
+  object-fit: cover; /* Corta e ajusta a imagem para preencher sem distorção */
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.suggestions-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.suggestions-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.suggestions-exit {
+  opacity: 1;
+}
+
+.suggestions-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 200ms, transform 200ms;
+}

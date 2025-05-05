@@ -14,7 +14,7 @@
 }
 
 body {
-  background-image: url('sua-imagem.png'); /* Caminho para sua imagem */
+  background-image: url('/images/Background.png');
   background-size: 50% auto; /* 50% da largura e altura proporcional */
   background-position: center center; /* Centralizar a imagem */
   background-repeat: no-repeat; /* Evitar repetições */

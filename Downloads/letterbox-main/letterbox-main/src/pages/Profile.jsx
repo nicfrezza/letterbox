@@ -1,13 +1,13 @@
 // src/pages/UserPage.js
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 import { 
-  FiEdit2, FiUser, FiMail, FiPhone, FiMapPin, 
-  FiCalendar, FiSave, FiGithub, FiTwitter, FiLinkedin 
+  FiEdit2, FiUser, FiPhone, FiMapPin, 
+  FiCalendar, FiSave
 } from 'react-icons/fi';
 
 // Vintage color palette
@@ -83,17 +83,7 @@ const UserPage = () => {
     }));
   };
 
-  const handleSocialLinkChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData(prevData => ({
-      ...prevData,
-      socialLinks: {
-        ...prevData.socialLinks,
-        [name]: value
-      }
-    }));
-  };
-
+ 
   const handleSaveProfile = async () => {
     try {
       setIsLoading(true);
@@ -114,14 +104,12 @@ const UserPage = () => {
       if (!file) return;
   
       setIsLoading(true);
-      const storage = getStorage();
       const photoRef = ref(storage, `profile-photos/${user.uid}/${file.name}`);
       
       await uploadBytes(photoRef, file);
-      const photoURL = await getDownloadURL(photoRef);
       
       await updateProfile(auth.currentUser, { photoURL });
-      await setDoc(doc(db, 'users', user.uid), {
+      await setDoc(doc( 'users', user.uid), {
         ...profileData,
         photoURL
       }, { merge: true });
@@ -180,7 +168,7 @@ const UserPage = () => {
   }
 
   // Custom Input Component with vintage styling
-  const VintageInput = ({ icon: Icon, label, type = "text", name, value, onChange, disabled }) => (
+  const VintageInput = ({ icon: Icon, label, type = "text", name, value, onChange }) => (
     <div className="space-y-2">
       <label className="flex items-center gap-2 font-serif text-sm" style={{ color: colors.secondary }}>
         {Icon && <Icon size={16} />}
@@ -191,7 +179,6 @@ const UserPage = () => {
         name={name}
         value={value}
         onChange={onChange}
-        disabled={disabled}
         className="w-full px-4 py-2 rounded-md border-2 transition-all duration-300
           disabled:cursor-not-allowed font-serif"
         style={{
@@ -226,7 +213,6 @@ const UserPage = () => {
       <input
         type="file"
         accept="image/*"
-        onChange={handlePhotoUpload}
         className="hidden"
       />
       <FiEdit2 size={16} style={{ color: colors.secondary }} />

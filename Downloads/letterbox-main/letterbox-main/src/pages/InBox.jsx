@@ -1,13 +1,11 @@
 // CartaForm.jsx - Part 1: Imports and Initial State Setup
-import React, { useState, useEffect, useRef } from 'react';
+import  { useState, useEffect, useRef } from 'react';
 import { 
-  FaPen, FaMoon, FaSun, FaPaperPlane, FaQuestionCircle, 
-  FaHistory, FaSave, FaShare, FaFont, FaImage, FaPalette, 
+   FaMoon, FaSun, FaPaperPlane, FaSave, FaShare, FaFont, 
   FaUndo, FaRedo, FaBold, FaItalic, FaUnderline, FaList,
   FaAlignLeft, FaAlignCenter, FaAlignRight
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Tooltip } from 'react-tooltip';
 import { collection, addDoc, getDocs, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../config/firebase';
 import NavBar from '../Components/NavBar';
@@ -18,9 +16,8 @@ const InBox = () => {
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [fontSize, setFontSize] = useState('medium');
+  const [ setProgress] = useState(0);
+  const [fontSize] = useState('medium');
   const [showFormatting, setShowFormatting] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState('blank');
   const [draftSaved, setDraftSaved] = useState(false);
@@ -43,9 +40,9 @@ const InBox = () => {
 
 
 
-
+  formattingOptions
   // Text Formatting States
-  const [selectedText, setSelectedText] = useState({
+  const [ setSelectedText] = useState({
     start: 0,
     end: 0,
     text: ''
@@ -215,43 +212,8 @@ const InBox = () => {
     }
   };
 
-  const handleFormatting = (action) => {
-    const textarea = textAreaRef.current;
-    if (!textarea) return;
-
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const text = textarea.value;
-
-    let newText = text;
-    let newFormatOptions = { ...formatOptions };
-
-    switch (action) {
-      case 'bold':
-        newText = text.substring(0, start) + `**${text.substring(start, end)}**` + text.substring(end);
-        newFormatOptions.bold = !formatOptions.bold;
-        break;
-      case 'italic':
-        newText = text.substring(0, start) + `*${text.substring(start, end)}*` + text.substring(end);
-        newFormatOptions.italic = !formatOptions.italic;
-        break;
-      case 'underline':
-        newText = text.substring(0, start) + `_${text.substring(start, end)}_` + text.substring(end);
-        newFormatOptions.underline = !formatOptions.underline;
-        break;
-      case 'left':
-      case 'center':
-      case 'right':
-        newFormatOptions.alignment = action;
-        break;
-      default:
-        break;
-    }
-
-    setFormatOptions(newFormatOptions);
-    setFormData(prev => ({ ...prev, content: newText }));
-  };
-
+ 
+  
   // Form Handlers
   const handleTemplateChange = (e) => {
     const selectedTemplateId = e.target.value;
@@ -314,12 +276,7 @@ const InBox = () => {
         throw new Error("Por favor, selecione um destinatário válido");
       }
       
-      const messageId = await saveMessageToFirebase({
-        darkMode,
-        fontSize,
-        selectedTemplate,
-        wordCount
-      });
+   
       
       await fetchMessages();
       alert('Carta enviada com sucesso!');
@@ -398,7 +355,7 @@ return (
         ${isNavOpen ? 'md:ml-64' : 'ml-0'}
         ${darkMode 
           ? 'bg-gray-900 text-gray-100' 
-          : 'bg-[#E8E1D5] bg-[url("/parchment-texture.png")] bg-cover bg-no-repeat'}
+          : 'bg-[#E8E1D5] bg-[url("/images/Background.png")] bg-cover bg-no-repeat'}
       `}
     >
       {/* Header */}

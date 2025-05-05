@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { FaBars, FaTimes, FaEye, FaEyeSlash, FaGoogle, FaArrowRight } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
+import { getDoc  } from 'firebase'
 import { 
   createUserWithEmailAndPassword, 
   signInWithPopup, 
@@ -23,7 +24,6 @@ const SignUp = () => {
     confirmPassword: '',
   });
 
-  const [isDarkMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');

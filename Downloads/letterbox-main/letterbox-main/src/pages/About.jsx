@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { FaPen, FaBars, FaTimes } from 'react-icons/fa';
+import  { useState, useEffect } from 'react';
 import Navigation from '../Components/Navigation';
 
 
@@ -22,11 +21,6 @@ const About = () => {
 
 };
 
-
-  const pages = [
-    { id: 0, title: "Home" },
-    { id: 2, title: "About" }
-  ];
 
   // Animation on component mount
   useEffect(() => {

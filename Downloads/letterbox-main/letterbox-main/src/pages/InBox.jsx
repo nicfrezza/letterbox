@@ -353,10 +353,7 @@ return (
         transition-all 
         duration-300
         ${isNavOpen ? 'md:ml-64' : 'ml-0'}
-        ${darkMode 
-          ? 'bg-gray-900 text-gray-100' 
-          : 'bg-[#E8E1D5] bg-[url("/images/Background.png")] bg-cover bg-no-repeat'}
-      `}
+       `}
     >
       {/* Header */}
       <header className={`

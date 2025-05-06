@@ -1,7 +1,9 @@
-// src/components/Navigation.js
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaPen, FaBars, FaTimes } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+
+
+
 
 const Navigation = ({ 
   isDarkMode, 
@@ -88,5 +90,20 @@ const Navigation = ({
     </>
   );
 };
+
+Navigation.propTypes = {
+  isDarkMode: PropTypes.bool.isRequired,
+  setIsDarkMode: PropTypes.func.isRequired,
+  colors: PropTypes.shape({
+    accent: PropTypes.string.isRequired,
+    primary: PropTypes.string.isRequired,
+    secondary: PropTypes.string.isRequired,
+  }).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
+};
+
 
 export default Navigation;

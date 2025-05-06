@@ -1,4 +1,3 @@
-// CartaForm.jsx - Part 1: Imports and Initial State Setup
 import { useState, useEffect, useRef } from 'react';
 import { 
    FaMoon, FaSun, FaPaperPlane, 
@@ -16,6 +15,7 @@ const CartaForm = () => {
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [ setProgress] = useState(0);
   const [fontSize] = useState('medium');
   const [showFormatting, setShowFormatting] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState('blank');
@@ -47,6 +47,8 @@ const CartaForm = () => {
     text: ''
   });
 
+
+  
   const [formatOptions, setFormatOptions] = useState({
     bold: false,
     italic: false,
@@ -113,6 +115,7 @@ const CartaForm = () => {
   };
 
  
+
 
   // User Search Function
   const searchUsers = async (query) => {
@@ -200,9 +203,9 @@ const CartaForm = () => {
       setSelectedText({ start, end, text });
     }
   };
+ 
 
-
-
+  
   // Form Handlers
   const handleTemplateChange = (e) => {
     const selectedTemplateId = e.target.value;
@@ -265,8 +268,7 @@ const CartaForm = () => {
         throw new Error("Por favor, selecione um destinatário válido");
       }
       
-      
-      
+    
       await fetchMessages();
       alert('Carta enviada com sucesso!');
     } catch (error) {
@@ -299,7 +301,15 @@ const CartaForm = () => {
     fetchMessages();
   }, []);
 
- 
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setProgress(prev => (prev >= 100 ? 0 : prev + 10));
+      }, 500);
+      return () => clearInterval(interval);
+    }
+  }, [isLoading]);
+
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode');
     if (savedDarkMode) {
@@ -333,10 +343,7 @@ return (
         transition-all 
         duration-300
         ${isNavOpen ? 'md:ml-64' : 'ml-0'}
-        ${darkMode 
-          ? 'bg-gray-900 text-gray-100' 
-          : 'bg-[#E8E1D5] bg-[url("/images/Background.png")] bg-cover bg-no-repeat'}
-      `}
+        `}
     >
       {/* Header */}
       <header className={`

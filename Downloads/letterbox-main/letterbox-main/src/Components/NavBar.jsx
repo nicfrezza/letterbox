@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Remove duplicate import
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaPen, FaInbox, FaUserCircle, FaCog, FaArchive,
-  FaBars, FaTimes, FaSignOutAlt, FaChevronLeft
+  FaBars, FaTimes, FaSignOutAlt
 } from 'react-icons/fa';
 import { auth } from '../config/firebase';
 import { signOut } from 'firebase/auth';
+import PropTypes from 'prop-types';
+
 
 const navItems = [
   { icon: <FaPen />, label: 'Nova Carta', path: '/dashboard' },
@@ -255,5 +257,26 @@ const NavBar = ({ darkMode, isOpen, onToggle }) => {
     </>
   );
 };
+
+
+NavBar.propTypes = {
+  isDarkMode: PropTypes.bool.isRequired,
+  setIsDarkMode: PropTypes.func.isRequired,
+  colors: PropTypes.shape({
+    accent: PropTypes.string.isRequired,
+    primary: PropTypes.string.isRequired,
+    secondary: PropTypes.string.isRequired,
+  }).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
+  darkMode: PropTypes.bool.isRequired,
+  isOpen: PropTypes.func.isRequired,
+  onToggleOpen: PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired
+};
+
+
 
 export default NavBar;

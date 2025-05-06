@@ -1,16 +1,12 @@
 import  { useState, useEffect } from 'react';
 import { FaBars, FaTimes, FaEye, FaEyeSlash, FaGoogle, FaArrowRight } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
-import { getDoc  } from 'firebase'
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithPopup, 
-  GoogleAuthProvider,
-  updateProfile 
-} from 'firebase/auth';
+import { getDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider,updateProfile } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { db } from '../config/firebase'; 
-import { setDoc, doc } from 'firebase/firestore';  
+import { setDoc, doc } from 'firebase/firestore'; 
+
 
 
 const SignUp = () => {

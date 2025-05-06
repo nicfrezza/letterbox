@@ -44,6 +44,13 @@ export function FirebaseProvider({ children }) {
     };
   }, []);
 
+  // Usando ref e onValue
+const dbRef = ref(database, 'path/to/data');
+onValue(dbRef, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data);
+});
+
   const value = {
     user,
     loading,

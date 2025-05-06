@@ -2,18 +2,17 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getDatabase, ref, onValue } from 'firebase/database'; // Importações adicionadas
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyAc5bLDyLlF3j8pHTpFnctGpLSrliNkJOA",
-    authDomain: "letters-205e1.firebaseapp.com",
-    projectId: "letters-205e1",
-    storageBucket: "letters-205e1.firebasestorage.app",
-    messagingSenderId: "961205302180",
-    appId: "1:961205302180:web:8026485fb23f3b5ba10731",
-    measurementId: "G-B85S80PGZ6"
+  apiKey: "AIzaSyAc5bLDyLlF3j8pHTpFnctGpLSrliNkJOA",
+  authDomain: "letters-205e1.firebaseapp.com",
+  projectId: "letters-205e1",
+  storageBucket: "letters-205e1.appspot.com",
+  messagingSenderId: "961205302180",
+  appId: "1:961205302180:web:8026485fb23f3b5ba10731",
+  measurementId: "G-B85S80PGZ6"
 };
-
 
 // Initialize Firebase
 let app;
@@ -26,10 +25,18 @@ try {
 // Initialize services
 const auth = getAuth(app);
 const db = getFirestore(app);
+const database = getDatabase(app); // Inicializa o Realtime Database
+
+// Exemplo de uso do Realtime Database
+const dbRef = ref(database, 'path/to/data');
+onValue(dbRef, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data);
+});
 
 // Add connection state handling
 const handleConnectionState = () => {
-  const connectedRef = ref(db, '.info/connected');
+  const connectedRef = ref(database, '.info/connected');
   onValue(connectedRef, (snap) => {
     if (snap.val() === true) {
       console.log('Connected to Firebase');
@@ -40,7 +47,7 @@ const handleConnectionState = () => {
 };
 
 // Export instances
-export { app, auth, db, handleConnectionState };
+export { app, auth, db, database, handleConnectionState };
 
 // Optional: Add error handling for auth state changes
 auth.onAuthStateChanged((user) => {

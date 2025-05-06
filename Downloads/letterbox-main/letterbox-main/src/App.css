@@ -14,8 +14,7 @@
 }
 
 body {
-  background-image: url('/images/Background.png');
-  background-size: 50% auto; /* 50% da largura e altura proporcional */
+    background-size: 50% auto; /* 50% da largura e altura proporcional */
   background-position: center center; /* Centralizar a imagem */
   background-repeat: no-repeat; /* Evitar repetições */
   height: 100vh; /* Ocupa 100% da altura da tela */
